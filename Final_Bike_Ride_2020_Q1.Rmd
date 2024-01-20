@@ -1,0 +1,142 @@
+---
+title: "Bike_Share_2020_Q1"
+author: "Hardikkumar Malaviya"
+date: "2024-01-17"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Install Packages:
+
+```{r Install Packages, warning=FALSE}
+install.packages("tidyverse")
+install.packages("lubridate")
+install.packages("janitor")
+install.packages("dplyr")
+install.packages("ggplot2")
+```
+
+##Load Packages:
+```{r Load Packages}
+library(tidyverse)
+library(lubridate)
+library(janitor)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+rm(list=ls())
+```
+## Check is there any empty rows or colums
+
+```{r Check empty rows and Cols}
+Bike_D1 <- read_csv("Divvy_Trips_2020_Q1.csv") %>% 
+remove_empty(which = c("cols")) %>% 
+remove_empty(which = c("rows")) 
+```
+## Add columns with day of week and start / end time in hours and minutes
+```{r add column with day of week and start/ end time}
+Bike_Data <- Bike_D1 %>% 
+  mutate(day_of_week=weekdays(started_at)) %>% 
+  mutate(start_hr=format(as.POSIXct(started_at), format = "%H:%M")) %>% 
+  mutate(end_hr=format(as.POSIXct(ended_at), format = "%H:%M")) 
+```
+
+##Start time :
+```{r Start time}
+df1<-separate(Bike_Data,col=start_hr, into = c('start_h', 'start_m'), sep = ':',remove = TRUE, convert = FALSE) %>% 
+    mutate(Start_Time_minutes = (as.integer(start_h) * 60 + as.integer(start_m)))
+    
+```
+
+##End Time : 
+```{r End Time}
+df2<- 
+  separate(Bike_Data,col=end_hr, into = c('end_h', 'end_m'), sep = ':',remove = TRUE,
+  convert = FALSE) %>% 
+    mutate(End_Time_minutes = (as.integer(end_h) * 60 + as.integer(end_m)))
+```
+
+##Merge data frams :
+```{r Merge data frams }
+df3<-merge(x = df1, y = df2, all = TRUE)
+```
+
+##Calculte ride length = end time - start time
+```{r Calculate ride length}
+Final_Data <- df3 %>% 
+  mutate(ride_length = End_Time_minutes- Start_Time_minutes)
+```
+
+## Use. factor funtion,
+```{r Plot1 : Number of Rides by Day of Week }
+Final_Data$day_of_week <- factor(Final_Data$day_of_week, c("Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday", "Sunday"))
+
+Final_Data %>% 
+  ggplot() + geom_bar(aes(y=day_of_week, fill= member_casual)) +
+  labs(title = "Number of Rides by Day of Week",subtitle = "From Divvy_Trips_2020_Q1 Data", caption = "Date: 01/16/2024 | Hardikkumar", x="Number of Trips", y="Weekday") +
+  scale_x_continuous(labels = unit_format(unit = "K", scale = 1e-3))+
+  #scale_x_continuous(breaks = c(0, 10000, 20000, 30000, 40000, 50000,60000,70000,80000))+
+  scale_x_continuous(labels = unit_format(unit = "K", scale = 1e-3),breaks = c(0, 10000, 20000, 30000, 40000, 50000,60000,70000,80000))+
+  theme(axis.text.x = element_text(size= 15 ,angle = 35, color= "darkgreen"),axis.text.y = element_text(size = 12, color = "darkgreen"),text = element_text(size = 12),plot.caption.position = "plot") +
+  scale_fill_manual(name="User Type",labels=c("Casual", "Member"), values=c("dodgerblue", "firebrick"))
+```
+##Plot 2:
+```{r Plot2 : Member and Casual Riders Vs. Average Length of Rides }
+Final_Data %>% 
+  group_by(member_casual) %>% 
+  arrange(member_casual,desc(member_casual)) %>% 
+  summarise(mean_ride=mean(ride_length)) %>% 
+ ggplot() + geom_col(aes(y=mean_ride, x= member_casual), fill= "darkblue") +
+  labs(title = "Member and Casual Riders Vs. Average Length of Rides",subtitle = "From Divvy_Trips_2020_Q1 Data", caption = "Date: 01/16/2024 | Hardikkumar", x="Membership", y="Average length of Rides (Min.)") +
+  theme(axis.text.x = element_text(size= 15 ,angle = 0, color= "darkgreen"),axis.text.y = element_text(size = 15, color = "darkgreen"),text = element_text(size = 15)) 
+```
+
+```{r}
+library(ggpubr)
+ Final_Data %>% 
+   ggpie(Final_Data, mean_ride, member_casual)
+
+```
+
+##Plot 3:
+```{r Plot3 : day of week Vs. Average Length of Rides with type of Membership }
+Final_Data$day_of_week <- factor(Final_Data$day_of_week, c("Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday", "Sunday"))
+Final_Data %>% 
+  group_by(day_of_week,member_casual) %>% 
+  summarise(mean_ride=mean(ride_length)) %>% 
+ ggplot() + geom_col(aes(y=mean_ride, x= day_of_week, fill= member_casual) )+
+labs(title = "Day of week Vs. Average Length of Rides",subtitle = "From Divvy_Trips_2020_Q1 Data", caption = "Date: 01/16/2024 | Hardikkumar", x="Day of week", y="Average length of Rides (Min.)") +
+   theme(axis.text.x = element_text(size= 15 ,angle = 30, color= "darkgreen"),axis.text.y = element_text(size = 15, color = "darkgreen"),text = element_text(size = 15),plot.caption.position = "plot") +
+  scale_fill_manual(name="User Type",labels=c("Casual", "Member"), values=c("brown", "darkblue"))
+```
+##Plot 4:
+```{r Plot 4:Day of Week Vs. Average Length of Rides with type of Membership }
+Final_Data$day_of_week <- factor(Final_Data$day_of_week, c("Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday", "Sunday"))
+Final_Data %>% 
+
+ ggplot() + geom_bar(aes(x=day_of_week, fill= member_casual), position = "dodge")+
+  
+  
+labs(title = "Day of Week Vs. Total Number of Rides",subtitle = "From Divvy_Trips_2020_Q1 Data", caption = "Date: 01/16/2024 | Hardikkumar", x="Day of week", y="Total Number of Rides")+
+  theme(axis.text.x = element_text(size= 12 ,angle = 30, color= "darkgreen"),axis.text.y = element_text(size = 12, color = "darkgreen"),text = element_text(size = 15),plot.caption.position = "plot") +
+    scale_y_continuous(labels = unit_format(unit = "K", scale = 1e-3))+
+  scale_y_continuous(labels = unit_format(unit = "K", scale = 1e-3),breaks = c(0, 10000, 20000, 30000, 40000, 50000,60000,70000,80000))+
+   scale_fill_manual(name="User Type",labels=c("Casual", "Member"), values=c("brown", "darkblue"))
+
+
+```
+
+
+
+
+
+
+
+
+
+
