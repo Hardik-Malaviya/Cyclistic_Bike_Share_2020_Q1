@@ -140,9 +140,6 @@ Final_Data <- df3 %>%
 ```
 
 ### Plot 1:
-* Data: 1st quarter of 2020 and only for Docked-bike.  
-* Members uses the bike more compared to the casual customer.
-* Also, Members prefer bike on weekdays (Monday to Friday) where the casual customers  on weekends (Saturday and Sunday).
 
 ```{r Plot2 : Member and Casual Riders Vs. Average Length of Rides }
 Final_Data %>% 
@@ -154,10 +151,12 @@ Final_Data %>%
                 x="Membership", y="Average length of Rides (Min.)") +
   theme(axis.text.x = element_text(size= 15 ,angle = 0, color= "darkgreen"),axis.text.y = element_text(size = 15, color = "darkgreen"),text = element_text(size = 15)) 
 ```
+
 ![Dashbord](f1.png)
 
 
 ### Plot 2:
+
 ```{r Plot3 : day of week Vs. Average Length of Rides with type of Membership }
 Final_Data$day_of_week <- factor(Final_Data$day_of_week, c("Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday", "Sunday"))
 Final_Data %>%
@@ -173,7 +172,9 @@ Final_Data %>%
 ```
 
 ![Dashbord](f2.png)
+
 ### Plot 3:
+
 ```{r Plot 4:Day of Week Vs. Average Length of Rides with type of Membership }
 Final_Data$day_of_week <-
            factor(Final_Data$day_of_week, c("Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday", "Sunday"))
