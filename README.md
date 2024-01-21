@@ -1,10 +1,21 @@
-# Cyclistic Bike-Share : How does a company navigate speedy success? 
+# **Cyclistic Bike-Share : How does a company navigate speedy success?**
+## _Author : Hardikkumar Malaviya_
+## _Date : 01-17-2024_
 
-## Author : Hardikkumar Malaviya
-## Date : 01-17-2024
 ## Table of Contents:
-   [Summary](#Summary-of-Cyclistic)
- 
+   - [Summary](#Summary-of-Cyclistic)
+   - [Data Sources](#Data-Sources)
+   - [Hypothesis and Clear goal](#Hypothesis-and-Clear-goal)
+   - [Problem & Analysis Task](#Problem-&-Analysis-Task)
+   - [Key Findings](#Key-Findings)
+   - [Recommendations](Recommendations)
+   - [Things to Consider](Things-to-Consider)
+   - []()
+   - []()
+   - []()
+   - []()
+   
+
 ### Summary: 
 
 About the company :
@@ -12,7 +23,9 @@ About the company :
 Cyclistic launched a successful bike-share offering in 2016. Since then, the program has grown to a fleet of 5,824 bicycles that are geotracked and locked into a network of 692 stations across Chicago. The bikes can be unlocked from one station and returned to any other station in the system anytime.
 
 Customers who purchase single-ride or full-day passes are referred to as casual riders. Customers who purchase annual memberships are Cyclistic members. 
-			 							
+
+### Data Sources:
+
 ### Hypothesis and Clear goal: 
 
 Hypothesis is, Maximizing the number of annual members will be key to future growth.
@@ -131,22 +144,11 @@ Final_Data <- df3 %>%
   mutate(ride_length = End_Time_minutes- Start_Time_minutes)
 ```
 
-### Use. factor funtion,
-```{r Plot1 : Number of Rides by Day of Week }
-Final_Data$day_of_week <- factor(Final_Data$day_of_week, c("Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday", "Sunday"))
+### Plot 1:
+* Data: 1st quarter of 2020 and only for Docked-bike.  
+* Members uses the bike more compared to the casual customer.
+* Also, Members prefer bike on weekdays (Monday to Friday) where the casual customers  on weekends (Saturday and Sunday).
 
-Final_Data %>% 
-  ggplot() + geom_bar(aes(y=day_of_week, fill= member_casual)) +
-  labs(title = "Number of Rides by Day of Week",subtitle = "From Divvy_Trips_2020_Q1 Data", caption = "Date: 01/16/2024 | Hardikkumar", x="Number of Trips", y="Weekday") +
-  scale_x_continuous(labels = unit_format(unit = "K", scale = 1e-3))+
-  #scale_x_continuous(breaks = c(0, 10000, 20000, 30000, 40000, 50000,60000,70000,80000))+
-  scale_x_continuous(labels = unit_format(unit = "K", scale = 1e-3),breaks = c(0, 10000, 20000, 30000, 40000, 50000,60000,70000,80000))+
-  theme(axis.text.x = element_text(size= 15 ,angle = 35, color= "darkgreen"),axis.text.y = element_text(size = 12, color = "darkgreen"),text = element_text(size = 12),
-                        plot.caption.position = "plot") +
-  scale_fill_manual(name="User Type",labels=c("Casual", "Member"), values=c("dodgerblue", "firebrick"))
-```
-
-### Plot 2:
 ```{r Plot2 : Member and Casual Riders Vs. Average Length of Rides }
 Final_Data %>% 
   group_by(member_casual) %>% 
@@ -157,43 +159,45 @@ Final_Data %>%
                 x="Membership", y="Average length of Rides (Min.)") +
   theme(axis.text.x = element_text(size= 15 ,angle = 0, color= "darkgreen"),axis.text.y = element_text(size = 15, color = "darkgreen"),text = element_text(size = 15)) 
 ```
+<img width="1018" alt="f1" src="https://github.com/Hardik-Malaviya/Cyclistic_Bike_Share_2020_Q1/assets/152107262/a8f55d70-c54c-431f-b5a4-0fe3ed2859b3">
 
-```{r}
 
- Final_Data %>% 
-   ggpie(Final_Data, mean_ride, member_casual)
 
-```
-
-### Plot 3:
+### Plot 2:
 ```{r Plot3 : day of week Vs. Average Length of Rides with type of Membership }
 Final_Data$day_of_week <- factor(Final_Data$day_of_week, c("Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday", "Sunday"))
-Final_Data %>% 
-  group_by(day_of_week,member_casual) %>% 
-  summarise(mean_ride=mean(ride_length)) %>% 
- ggplot() + geom_col(aes(y=mean_ride, x= day_of_week, fill= member_casual) )+
-labs(title = "Day of week Vs. Average Length of Rides",subtitle = "From Divvy_Trips_2020_Q1 Data", caption = "Date: 01/16/2024 | Hardikkumar",
+Final_Data %>%
+          group_by(day_of_week,member_casual) %>% 
+          summarise(mean_ride=mean(ride_length)) %>% 
+      ggplot() + geom_col(aes(y=mean_ride, x= day_of_week, fill= member_casual) )+
+      labs(title = "Day of week Vs. Average Length of Rides",subtitle = "From Divvy_Trips_2020_Q1 Data", caption = "Date: 01/16/2024 | Hardikkumar",
                 x="Day of week", y="Average length of Rides (Min.)") +
-   theme(axis.text.x = element_text(size= 15 ,angle = 30, color= "darkgreen"),axis.text.y = element_text(size = 15, color = "darkgreen"),
-                   text = element_text(size = 15),plot.caption.position = "plot") +
-  scale_fill_manual(name="User Type",labels=c("Casual", "Member"), values=c("brown", "darkblue"))
+                theme(axis.text.x = element_text(size= 15 ,angle = 30, color= "darkgreen"),
+                      axis.text.y = element_text(size = 15, color = "darkgreen"),
+                      text = element_text(size = 15),plot.caption.position = "plot") +
+      scale_fill_manual(name="User Type",labels=c("Casual", "Member"), values=c("brown", "darkblue"))
 ```
-### Plot 4:
+<img width="936" alt="f2" src="https://github.com/Hardik-Malaviya/Cyclistic_Bike_Share_2020_Q1/assets/152107262/8db3410a-b62b-4d56-91d1-9494bb6f292b">
+
+
+### Plot 3:
 ```{r Plot 4:Day of Week Vs. Average Length of Rides with type of Membership }
-Final_Data$day_of_week <- factor(Final_Data$day_of_week, c("Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday", "Sunday"))
-Final_Data %>% 
+Final_Data$day_of_week <-
+           factor(Final_Data$day_of_week, c("Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday", "Sunday"))
 
- ggplot() + geom_bar(aes(x=day_of_week, fill= member_casual), position = "dodge")+
-  
-  
-labs(title = "Day of Week Vs. Total Number of Rides",subtitle = "From Divvy_Trips_2020_Q1 Data", caption = "Date: 01/16/2024 | Hardikkumar", x="Day of week", y="Total Number of Rides")+
-  theme(axis.text.x = element_text(size= 12 ,angle = 30, color= "darkgreen"),axis.text.y = element_text(size = 12, color = "darkgreen"),text = element_text(size = 15),plot.caption.position = "plot") +
-    scale_y_continuous(labels = unit_format(unit = "K", scale = 1e-3))+
-  scale_y_continuous(labels = unit_format(unit = "K", scale = 1e-3),breaks = c(0, 10000, 20000, 30000, 40000, 50000,60000,70000,80000))+
-   scale_fill_manual(name="User Type",labels=c("Casual", "Member"), values=c("brown", "darkblue"))
-
-
+Final_Data %>% ggplot() + geom_bar(aes(x=day_of_week, fill= member_casual), position = "dodge")+
+   
+labs(title = "Day of Week Vs. Total Number of Rides",subtitle = "From Divvy_Trips_2020_Q1 Data",
+             caption = "Date: 01/16/2024 | Hardikkumar",
+           x="Day of week", y="Total Number of Rides")+
+           theme(axis.text.x = element_text(size= 12 ,angle = 30, color= "darkgreen"),
+                 axis.text.y = element_text(size = 12, color = "darkgreen"),
+                 text = element_text(size = 15),plot.caption.position = "plot") +
+           scale_y_continuous(labels = unit_format(unit = "K", scale = 1e-3))+
+           scale_y_continuous(labels = unit_format(unit = "K", scale = 1e-3),
+                        breaks = c(0, 10000, 20000, 30000, 40000, 50000,60000,70000,80000))+
+           scale_fill_manual(name="User Type",labels=c("Casual", "Member"), values=c("brown", "darkblue"))
 ```
-
+<img width="904" alt="f3" src="https://github.com/Hardik-Malaviya/Cyclistic_Bike_Share_2020_Q1/assets/152107262/7a60feeb-3a69-4ea4-8c58-674abdd55efc">
 
 
