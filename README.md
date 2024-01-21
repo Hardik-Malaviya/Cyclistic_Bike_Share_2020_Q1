@@ -21,6 +21,7 @@ About the company :
 * Customers who purchase single-ride or full-day passes are referred to as casual riders. Customers who purchase annual memberships are Cyclistic members. 
 
 ### Data Sources:
+The primary dataset used for this analysis is the "Divvy_Trips_2020_Q1" [Download](https://divvy-tripdata.s3.amazonaws.com/index.html)
 
 ### Hypothesis and Clear goal: 
 
