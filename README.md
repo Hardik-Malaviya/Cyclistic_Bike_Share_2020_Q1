@@ -12,8 +12,7 @@ About the company :
 Cyclistic launched a successful bike-share offering in 2016. Since then, the program has grown to a fleet of 5,824 bicycles that are geotracked and locked into a network of 692 stations across Chicago. The bikes can be unlocked from one station and returned to any other station in the system anytime.
 
 Customers who purchase single-ride or full-day passes are referred to as casual riders. Customers who purchase annual memberships are Cyclistic members. 
-
-							 							
+			 							
 	Hypothesis and Clear goal: 
 
 Hypothesis is, Maximizing the number of annual members will be key to future growth.
@@ -67,6 +66,11 @@ Thank You!
 
 
 
-```{r}
+```{r Install Packages, warning=FALSE}
 install.packages("tidyverse")
+install.packages("lubridate")
+install.packages("janitor")
+install.packages("dplyr")
+install.packages("ggplot2")
 ```
+
