@@ -1,7 +1,7 @@
 # **Cyclistic Bike-Share : How does a company navigate speedy success?**
 ## _Author : Hardikkumar Malaviya_
 ## _Date : 01-17-2024_
-
+---
 ## Table of Contents:
    - [Project Overview](#Project-Overview)
    - [Data Sources](#Data-Sources)
@@ -11,7 +11,10 @@
    - [Recommendations](#Recommendations)
    - [Things to Consider](#Things-to-Consider)
    
+---
+Hi everyone, over the last few months, I've been working on the **"Google Data Analytics Professional Certificate"** through Coursera. This is my final capstone project in the course. In this case study, I will be analyzing a public dataset for a fictional bike sharing company provided by the course. I will be using the Google sheets and R programming language for data analysis and visualizations.
 
+---
 ### Project Overview: 
 
 About the company :
