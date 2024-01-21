@@ -155,7 +155,6 @@ Final_Data %>%
                 x="Membership", y="Average length of Rides (Min.)") +
   theme(axis.text.x = element_text(size= 15 ,angle = 0, color= "darkgreen"),axis.text.y = element_text(size = 15, color = "darkgreen"),text = element_text(size = 15)) 
 ```
-<img width="1018" alt="f1" src="https://github.com/Hardik-Malaviya/Cyclistic_Bike_Share_2020_Q1/assets/152107262/a8f55d70-c54c-431f-b5a4-0fe3ed2859b3">
 ![Dashbord](f1.png)
 
 
@@ -173,7 +172,6 @@ Final_Data %>%
                       text = element_text(size = 15),plot.caption.position = "plot") +
       scale_fill_manual(name="User Type",labels=c("Casual", "Member"), values=c("brown", "darkblue"))
 ```
-<img width="936" alt="f2" src="https://github.com/Hardik-Malaviya/Cyclistic_Bike_Share_2020_Q1/assets/152107262/8db3410a-b62b-4d56-91d1-9494bb6f292b">
 
 ![Dashbord](f2.png)
 ### Plot 3:
@@ -194,6 +192,5 @@ labs(title = "Day of Week Vs. Total Number of Rides",subtitle = "From Divvy_Trip
                         breaks = c(0, 10000, 20000, 30000, 40000, 50000,60000,70000,80000))+
            scale_fill_manual(name="User Type",labels=c("Casual", "Member"), values=c("brown", "darkblue"))
 ```
-<img width="904" alt="f3" src="https://github.com/Hardik-Malaviya/Cyclistic_Bike_Share_2020_Q1/assets/152107262/7a60feeb-3a69-4ea4-8c58-674abdd55efc">
 
 ![Dashbord](f3.png)
