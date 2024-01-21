@@ -3,7 +3,7 @@
 ## _Date : 01-17-2024_
 
 ## Table of Contents:
-   - [Summary](#Summary-of-Cyclistic)
+   - [Project Overview](#Project-Overview)
    - [Data Sources](#Data-Sources)
    - [Hypothesis and Clear goal](#Hypothesis-and-Clear-goal)
    - [Problem & Analysis Task](#Problem-&-Analysis-Task)
@@ -12,7 +12,7 @@
    - [Things to Consider](#Things-to-Consider)
    
 
-### Summary: 
+### Project Overview: 
 
 About the company :
 
@@ -91,6 +91,7 @@ library(lubridate)
 library(janitor)
 library(dplyr)
 library(tidyr)
+library(scales)
 library(ggplot2)
 library(ggpubr)
 rm(list=ls())
