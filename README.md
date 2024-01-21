@@ -8,12 +8,8 @@
    - [Hypothesis and Clear goal](#Hypothesis-and-Clear-goal)
    - [Problem & Analysis Task](#Problem-&-Analysis-Task)
    - [Key Findings](#Key-Findings)
-   - [Recommendations](Recommendations)
-   - [Things to Consider](Things-to-Consider)
-   - []()
-   - []()
-   - []()
-   - []()
+   - [Recommendations](#Recommendations)
+   - [Things to Consider](#Things-to-Consider)
    
 
 ### Summary: 
