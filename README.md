@@ -1,11 +1,11 @@
+# Cyclistic Bike-Share : How does a company navigate speedy success? 
 
- Cyclistic Bike-Share : How does a company navigate speedy success? 
-
-Author : Hardikkumar Malaviya
-Date : 01/17/2024
-
-
-Summary: 
+## Author : Hardikkumar Malaviya
+## Date : 01-17-2024
+## Table of Contents:
+   [Summary](#Summary-of-Cyclistic)
+ 
+### Summary: 
 
 About the company :
 
@@ -13,7 +13,7 @@ Cyclistic launched a successful bike-share offering in 2016. Since then, the pro
 
 Customers who purchase single-ride or full-day passes are referred to as casual riders. Customers who purchase annual memberships are Cyclistic members. 
 			 							
-	Hypothesis and Clear goal: 
+### Hypothesis and Clear goal: 
 
 Hypothesis is, Maximizing the number of annual members will be key to future growth.
 
@@ -21,7 +21,7 @@ Hypothesis is, Maximizing the number of annual members will be key to future gro
 Goal is to design marketing strategies aimed at converting casual riders into annual members. because cyclistic’s annual members are much more profitable than casual riders.
 
 
-  Problem & Analysis Task: 
+### Problem & Analysis Task: 
 
 
 Problem: Design effective marketing strategies that convert casual customers to annual members 
@@ -29,7 +29,7 @@ Problem: Design effective marketing strategies that convert casual customers to 
 Task: How casual riders and annual members use Cyclistic bikes differently?
 
 
-
+### Key Findings
 Data: 1st quarter of 2020 and only for Docked-bike.  
 Members uses the bike more compared to the casual customer.
 Also, Members prefer bike on weekdays (Monday to Friday) where the casual customers  on weekends (Saturday and Sunday).
@@ -42,7 +42,7 @@ Average length of rides for members are almost same for all days.
 On sunday, Casual customer prefer long trip compare to others days of week. 
 
 
-Recommendations:
+### Recommendations:
 
 Introducing plans and promotion on social media that may be more appealing to casual customers for the spring months. Plans could be include rewards system, gift card or great deal for newcomers.
 
@@ -50,7 +50,7 @@ By offering good membership rates in coldest months of the year(1st quarter ). I
 
 Offering membership that can hold lifelong rewards point and history to casual riders who don’t use service very often. Also provide membership option that allows borrow  maximum three  bikes at a time on single membership called family plan. Family plan option would offer special discount. 
 
-Things to Consider:
+### Things to Consider:
 
 
 The report understands the scope of this analysis is extremely limited and because of that fact, additional data, as well as data points may have been able to contribute to this report offering an even more granular analysis. The following are data points that could have enhanced the report (Additional points that were not examined):
@@ -60,11 +60,11 @@ Additional data : Whole year data, that would create big picture of uses of bike
 
 Pricing structure: It would  be effective to understanding the spending behaviour of casual user and membres based on the different bike sharing plans. 
 
-Thank You!
+### Thank You!
 
 
 
-
+### Install Packages : 
 
 ```{r Install Packages, warning=FALSE}
 install.packages("tidyverse")
@@ -75,7 +75,7 @@ install.packages("ggplot2")
 ```
 
 
-##Load Packages:
+### Load Packages:
 ```{r Load Packages}
 library(tidyverse)
 library(lubridate)
@@ -87,7 +87,7 @@ library(ggpubr)
 rm(list=ls())
 ```
 
-## Check is there any empty rows or colums
+### Check is there any empty rows or colums
 
 ```{r Check empty rows and Cols}
 Bike_D1 <- read_csv("Divvy_Trips_2020_Q1.csv") %>% 
@@ -96,7 +96,7 @@ remove_empty(which = c("rows"))
 ```
 
 
-## Add columns with day of week and start / end time in hours and minutes
+### Add columns with day of week and start / end time in hours and minutes
 ```{r add column with day of week and start/ end time}
 Bike_Data <- Bike_D1 %>% 
   mutate(day_of_week=weekdays(started_at)) %>% 
@@ -105,14 +105,14 @@ Bike_Data <- Bike_D1 %>%
 ```
 
 
-##Start time :
+### Start time :
 ```{r Start time}
 df1<-separate(Bike_Data,col=start_hr, into = c('start_h', 'start_m'), sep = ':',remove = TRUE, convert = FALSE) %>% 
     mutate(Start_Time_minutes = (as.integer(start_h) * 60 + as.integer(start_m)))
     
 ```
 
-##End Time : 
+### End Time : 
 ```{r End Time}
 df2<- 
   separate(Bike_Data,col=end_hr, into = c('end_h', 'end_m'), sep = ':',remove = TRUE,
@@ -120,18 +120,18 @@ df2<-
     mutate(End_Time_minutes = (as.integer(end_h) * 60 + as.integer(end_m)))
 ```
 
-##Merge data frams :
+### Merge data frams :
 ```{r Merge data frams }
 df3<-merge(x = df1, y = df2, all = TRUE)
 ```
 
-##Calculte ride length = end time - start time
+### Calculte ride length = end time - start time
 ```{r Calculate ride length}
 Final_Data <- df3 %>% 
   mutate(ride_length = End_Time_minutes- Start_Time_minutes)
 ```
 
-## Use. factor funtion,
+### Use. factor funtion,
 ```{r Plot1 : Number of Rides by Day of Week }
 Final_Data$day_of_week <- factor(Final_Data$day_of_week, c("Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday", "Sunday"))
 
@@ -146,7 +146,7 @@ Final_Data %>%
   scale_fill_manual(name="User Type",labels=c("Casual", "Member"), values=c("dodgerblue", "firebrick"))
 ```
 
-##Plot 2:
+### Plot 2:
 ```{r Plot2 : Member and Casual Riders Vs. Average Length of Rides }
 Final_Data %>% 
   group_by(member_casual) %>% 
@@ -165,7 +165,7 @@ Final_Data %>%
 
 ```
 
-##Plot 3:
+### Plot 3:
 ```{r Plot3 : day of week Vs. Average Length of Rides with type of Membership }
 Final_Data$day_of_week <- factor(Final_Data$day_of_week, c("Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday", "Sunday"))
 Final_Data %>% 
@@ -178,7 +178,7 @@ labs(title = "Day of week Vs. Average Length of Rides",subtitle = "From Divvy_Tr
                    text = element_text(size = 15),plot.caption.position = "plot") +
   scale_fill_manual(name="User Type",labels=c("Casual", "Member"), values=c("brown", "darkblue"))
 ```
-##Plot 4:
+### Plot 4:
 ```{r Plot 4:Day of Week Vs. Average Length of Rides with type of Membership }
 Final_Data$day_of_week <- factor(Final_Data$day_of_week, c("Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday", "Sunday"))
 Final_Data %>% 
