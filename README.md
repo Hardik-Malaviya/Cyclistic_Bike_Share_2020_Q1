@@ -17,7 +17,10 @@ Hi everyone, over the last few months, I've been working on the **"Google Data A
 ---
 
 ---
-[Case study: How does a bike-share navigate speedy success?]((https://github.com/Hardik-Malaviya/Cyclistic_Bike_Share_2020_Q1/blob/master/Case%20Study-%20Bike%20Share.pdf)
+
+### **Case study: How does a bike-share navigate speedy success?** 
+[Download](https://github.com/Hardik-Malaviya/Cyclistic_Bike_Share_2020_Q1/blob/master/Case%20Study-%20Bike%20Share.pdf)
+
 ---
 ### Project Overview: 
 
