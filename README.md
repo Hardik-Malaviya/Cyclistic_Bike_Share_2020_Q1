@@ -15,6 +15,10 @@
 Hi everyone, over the last few months, I've been working on the **"Google Data Analytics Professional Certificate"** through Coursera. This is my final capstone project in the course. In this case study, I will be analyzing a public dataset for a fictional bike sharing company provided by the course. I will be using the Google sheets and R programming language for data analysis and visualizations.
 
 ---
+
+---
+[Case study: How does a bike-share navigate speedy success?]()
+---
 ### Project Overview: 
 
 About the company :
