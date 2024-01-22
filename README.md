@@ -17,7 +17,7 @@ Hi everyone, over the last few months, I've been working on the **"Google Data A
 ---
 
 ---
-[Case study: How does a bike-share navigate speedy success?]()
+[Case study: How does a bike-share navigate speedy success?](Case Study- Bike Share.pdf)
 ---
 ### Project Overview: 
 
