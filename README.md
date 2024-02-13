@@ -85,7 +85,7 @@ Types of bike: Company offering different types of bikes, but this analysis data
 
 ### Install Packages : 
 
-```{r Install Packages, warning=FALSE}
+```r 
 
 install.packages("tidyverse")
 install.packages("lubridate")
@@ -98,7 +98,7 @@ install.packages("ggplot2")
 
 ### Load Packages:
 
-```{r Load Packages}
+```r
 library(tidyverse)
 library(lubridate)
 library(janitor)
@@ -112,7 +112,7 @@ rm(list=ls())
 
 ### Check is there any empty rows or colums
 
-```{r Check empty rows and Cols}
+```r
 Bike_D1 <- read_csv("Divvy_Trips_2020_Q1.csv") %>% 
 remove_empty(which = c("cols")) %>% 
 remove_empty(which = c("rows")) 
@@ -120,7 +120,7 @@ remove_empty(which = c("rows"))
 
 
 ### Add columns with day of week and start / end time in hours and minutes
-```{r add column with day of week and start/ end time}
+```r
 Bike_Data <- Bike_D1 %>% 
   mutate(day_of_week=weekdays(started_at)) %>% 
   mutate(start_hr=format(as.POSIXct(started_at), format = "%H:%M")) %>% 
@@ -129,14 +129,14 @@ Bike_Data <- Bike_D1 %>%
 
 
 ### Start time :
-```{r Start time}
+```r
 df1<-separate(Bike_Data,col=start_hr, into = c('start_h', 'start_m'), sep = ':',remove = TRUE, convert = FALSE) %>% 
     mutate(Start_Time_minutes = (as.integer(start_h) * 60 + as.integer(start_m)))
     
 ```
 
 ### End Time : 
-```{r End Time}
+```r 
 df2<- 
   separate(Bike_Data,col=end_hr, into = c('end_h', 'end_m'), sep = ':',remove = TRUE,
   convert = FALSE) %>% 
@@ -144,19 +144,19 @@ df2<-
 ```
 
 ### Merge data frams :
-```{r Merge data frams }
+```r
 df3<-merge(x = df1, y = df2, all = TRUE)
 ```
 
 ### Calculte ride length = end time - start time
-```{r Calculate ride length}
+```r
 Final_Data <- df3 %>% 
   mutate(ride_length = End_Time_minutes- Start_Time_minutes)
 ```
 
 ### Plot 1:
 
-```{r Plot2 : Member and Casual Riders Vs. Average Length of Rides }
+```r
 Final_Data %>% 
   group_by(member_casual) %>% 
   arrange(member_casual,desc(member_casual)) %>% 
@@ -172,7 +172,7 @@ Final_Data %>%
 
 ### Plot 2:
 
-```{r Plot3 : day of week Vs. Average Length of Rides with type of Membership }
+```r
 Final_Data$day_of_week <- factor(Final_Data$day_of_week, c("Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday", "Sunday"))
 Final_Data %>%
           group_by(day_of_week,member_casual) %>% 
@@ -189,8 +189,7 @@ Final_Data %>%
 ![Dashbord](f2.png)
 
 ### Plot 3:
-
-```{r Plot 4:Day of Week Vs. Average Length of Rides with type of Membership }
+```r
 Final_Data$day_of_week <-
            factor(Final_Data$day_of_week, c("Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday", "Sunday"))
 
