@@ -79,22 +79,25 @@ Types of bike: Company offering different types of bikes, but this analysis data
 
 * Pricing structure: It would  be effective to understanding the spending behaviour of casual user and membres based on the different bike sharing plans. 
 
-### Thank You!
+
 
 
 
 ### Install Packages : 
 
 ```{r Install Packages, warning=FALSE}
+
 install.packages("tidyverse")
 install.packages("lubridate")
 install.packages("janitor")
 install.packages("dplyr")
 install.packages("ggplot2")
+
 ```
 
 
 ### Load Packages:
+
 ```{r Load Packages}
 library(tidyverse)
 library(lubridate)
